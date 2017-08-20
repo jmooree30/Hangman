@@ -1,5 +1,12 @@
 load 'display.rb'
 
+class Hangman
+ attr_accessor :name
+ @name = name
+
+def initialize
+puts "What is your name?"
+@name = gets.chomp
 puts "
 ################################################
                    HANGMAN
@@ -14,14 +21,19 @@ puts "
               |      / \\
               |
               -----------------
-Welcome to Hangman. The computer will generate
+Welcome #{@name} to Hangman. The computer will generate
 a 5-12 letter random word. You will try to guess
 that word one letter at a time. Try to solve the
 puzzle before time runs out! 
 
 
 "
+Gameplay.new
+end
+end
 
+class Gameplay
+def initialize
 $array = []
 File.foreach('5text.txt') do |x| $array << x if (x.chomp.length >= 5 and x.chomp.length <= 12) end
 $random_word = $array.sample
@@ -39,7 +51,7 @@ def choice(n)
   end 
     if $random_word2.include?(n) == false
     $counter -= 1
-    display_gallows
+    display
     puts "incorrect guess"
     end 
   puts $cipher.join
@@ -49,7 +61,11 @@ end
 $counter = 5
 while $counter > 0
 choice(gets.chomp)
-end 
+end
+end
+end
+Hangman.new
+
 
 
 

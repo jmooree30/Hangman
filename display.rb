@@ -1,4 +1,4 @@
-def display_gallows
+def display
 		
 		if $counter == 5
 		puts "  ______"
