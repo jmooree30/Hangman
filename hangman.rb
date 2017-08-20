@@ -1,3 +1,4 @@
+load 'display.rb'
 
 puts "
 ################################################
@@ -20,25 +21,35 @@ puzzle before time runs out!
 
 
 "
+
 $array = []
 File.foreach('5text.txt') do |x| $array << x if (x.chomp.length >= 5 and x.chomp.length <= 12) end
 $random_word = $array.sample
 $random_word2 = $random_word.split(//)
+puts $random_word2.join
 
-$cipher = $random_word.gsub(/[a-z]/, '*')
-puts $cipher2
+$cipher = $random_word.gsub(/[a-z]/, '*').split(//)
+puts $cipher.join
 
-def choice
+def choice(n)
   $random_word2.each_with_index do |i,index|
-  if i.include? gets.chomp
-    $cipher[index] = i
-    puts $cipher
-      else puts $cipher
-      puts "Incorrect letter"
-  end
- end
+    if i == n
+    $cipher[index] = i 
+    end 
+  end 
+    if $random_word2.include?(n) == false
+    $counter -= 1
+    display_gallows
+    puts "incorrect guess"
+    end 
+  puts $cipher.join
 end
-choice
+
+
+$counter = 5
+while $counter > 0
+choice(gets.chomp)
+end 
 
 
 
