@@ -1,3 +1,4 @@
+require 'json'
 load 'display.rb'
 
 class Hangman
@@ -33,15 +34,19 @@ puzzle before time runs out!
 end
 
 class Gameplay
+  attr_accessor :cipher, :random_word2, :counter
+  @cipher = nil
+  @random_word2 = nil
+  @counter = nil
   def initialize
-    @array = []
+    array = []
     File.foreach('5text.txt') do |x|
       chomped = x.chomp
-      @array << chomped if (chomped.length >= 5 and chomped.length <= 12)
+      array << chomped if (chomped.length >= 5 and chomped.length <= 12)
     end
-    @random_word = @array.sample
-    @random_word2 = @random_word.split(//)
-    @cipher = @random_word.gsub(/[a-z]/, '*').split(//)
+    random_word = array.sample
+    @random_word2 = random_word.split(//)
+    @cipher = random_word.gsub(/[a-z]/, '*').split(//)
     puts @cipher.join
 
   def choice(n)
@@ -60,11 +65,11 @@ class Gameplay
         end
       end
       if @random_word2.include?(n) == false
-        $counter -= 1
+        @counter -= 1
         display
-        puts "#{$counter} guesses remaining."
+        puts "#{@counter} guesses remaining."
       end
-      if $counter == 0
+      if @counter == 0
         puts "would you like to start another game? Y/N"
         new_game = gets.chomp
         if new_game == "Y"
@@ -75,12 +80,12 @@ class Gameplay
         puts @cipher.join 
   end
 
+  @counter = 5
+  while @counter > 0 
+    choice(gets.chomp)
+  end
 
-$counter = 5
-while $counter > 0
-  choice(gets.chomp)
-end
-end
+ end 
 end
 Hangman.new
 

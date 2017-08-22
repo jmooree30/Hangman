@@ -1,6 +1,6 @@
 def display
 		
-		if $counter == 5
+		if @counter == 5
 		puts "  ______"
 		puts "  |   \\|"
 		puts "       |"
@@ -8,7 +8,7 @@ def display
 		puts "       |"
 		puts "       |"
 		puts "-------^-------"
-		elsif $counter == 4
+		elsif @counter == 4
 		puts "  ______"
 		puts "  |   \\|"
 		puts "  O    |"
@@ -16,7 +16,7 @@ def display
 		puts "       |"
 		puts "       |"
 		puts "-------^-------"
-		elsif $counter == 3
+		elsif @counter == 3
 		puts "  ______"
 		puts "  |   \\|"
 		puts "  O    |"
@@ -24,7 +24,7 @@ def display
 		puts "       |"
 		puts "       |"
 		puts "-------^-------"
-		elsif $counter == 2 
+		elsif @counter == 2 
 		puts "  ______"
 		puts "  |   \\|"
 		puts "  O    |"
@@ -32,7 +32,7 @@ def display
 		puts "       |"
 		puts "       |"
 		puts "-------^-------"
-		elsif $counter == 1
+		elsif @counter == 1
 		puts "  ______"
 		puts "  |   \\|"
 		puts "  O    |"
