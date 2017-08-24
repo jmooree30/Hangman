@@ -12,7 +12,6 @@ class Hangman
 ################################################
                    HANGMAN
 ################################################
-
                _________
               |        
               |       |
@@ -25,9 +24,8 @@ class Hangman
 Welcome #{@name} to Hangman. The computer will generate
 a 5-12 letter random word. You will try to guess
 that word one letter at a time. Try to solve the
-puzzle before time runs out! 
-
-
+puzzle before time runs out!
+\n 
 "
   
   end
@@ -45,26 +43,30 @@ class Gameplay
   @cipher = @random_word.gsub(/[a-z]/, '*').split(//)
   @random_word2 = @random_word.split(//)
   @counter = 5
-  
-  def to_json
-    JSON.generate({array: @array, filestuff: @filestuff, random_word: @random_word, cipher: @cipher, random_word2: @random_word2, counter: @counter})
-  end
-
-  def load
+  puts "Would you like to load a saved game? Y/N"
+  saved_game = gets.chomp
+  if saved_game == "Y"
     game_file = File.read("saved.json")
     data = JSON.parse(game_file)
+    @filestuff = data["filestuff"]
+    @random_word = data["random_word"]
     @cipher = data["cipher"]
     @random_word2 = data["random_word2"]
     @counter = data["counter"]
   end
+  puts @cipher.join
+  puts "Enter a letter."
   
-
-  def save_game(string)
-    game_file = File.open("saved.json","w") do 
-    game_file.write(string)
-    end 
+  def to_json
+    JSON.generate({filestuff: @filestuff, random_word: @random_word, cipher: @cipher, random_word2: @random_word2})
   end
 
+  def save_game(string) 
+    File.open("saved.json", "w") do |game_file|
+  game_file.write(string)
+    end
+  end
+ 
   def choice(n)
     @random_word2.each_with_index do |i,index|
       if i == n
@@ -84,13 +86,6 @@ class Gameplay
         @counter -= 1
         display
         puts "#{@counter} guesses remaining."
-        puts "To save press 1"
-        save = gets.chomp
-        if save == "1"
-          
-#Will not save 
-          save_game($b.to_json)
-        end
       end
       if @counter == 0
         puts "would you like to start another game? Y/N"
@@ -99,7 +94,11 @@ class Gameplay
           else exit 
         end
       end 
-        puts @cipher.join 
+      if n == "1"
+          save_game(to_json)
+        end 
+        puts @cipher.join
+        puts "Want to save? Press 1 to save."    
   end
 
   @counter = 5
@@ -110,7 +109,81 @@ class Gameplay
  end 
 end
 Hangman.new
-$b = Gameplay.new
+Gameplay.new
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
