@@ -34,8 +34,8 @@ end
 class Gameplay
   attr_accessor :array, :filestuff, :random_word, :cipher, :random_word2, :counter
   def initialize
-  @array = []
-  @filestuff = File.foreach('5text.txt') do |x|
+    @array = []
+    @filestuff = File.foreach('5text.txt') do |x|
       chomped = x.chomp
       @array << chomped if (chomped.length >= 5 and chomped.length <= 12)
     end
@@ -63,7 +63,7 @@ class Gameplay
 
   def save_game(string) 
     File.open("saved.json", "w") do |game_file|
-  game_file.write(string)
+      game_file.write(string)
     end
   end
  
@@ -73,32 +73,32 @@ class Gameplay
         @cipher[index] = i 
       end 
     end 
-      if n == @random_word2.join.to_s
-        puts "You win"
-        puts "would you like to start another game? Y/N"
-        new_game = gets.chomp
-        if new_game == "Y"
-          Hangman.new
-          else exit 
-        end
+    if n == @random_word2.join.to_s
+      puts "You win"
+      puts "would you like to start another game? Y/N"
+      new_game = gets.chomp
+      if new_game == "Y"
+        Hangman.new
+      else exit 
       end
-      if @random_word2.include?(n) == false
-        @counter -= 1
-        display
-        puts "#{@counter} guesses remaining."
+    end
+    if @random_word2.include?(n) == false
+      @counter -= 1
+      display
+      puts "#{@counter} guesses remaining."
+    end
+    if @counter == 0
+      puts "would you like to start another game? Y/N"
+      new_game = gets.chomp
+      if new_game == "Y"
+      else exit 
       end
-      if @counter == 0
-        puts "would you like to start another game? Y/N"
-        new_game = gets.chomp
-        if new_game == "Y"
-          else exit 
-        end
-      end 
-      if n == "1"
-          save_game(to_json)
-        end 
-        puts @cipher.join
-        puts "Want to save? Press 1 to save."    
+    end 
+    if n == "1"
+      save_game(to_json)
+    end 
+    puts @cipher.join
+    puts "Want to save? Press 1 to save."    
   end
 
   @counter = 5
@@ -110,165 +110,3 @@ class Gameplay
 end
 Hangman.new
 Gameplay.new
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
